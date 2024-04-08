@@ -13,7 +13,7 @@ import Notifications from "./src/screens/tabScreens/Notifications";
 import Login from "./src/screens/Login";
 import Profile from "./src/screens/drawerScreens/Profile";
 import { useAuth } from "./src/contexts/AuthContext";
-import register from "./src/screens/register";
+import Register from "./src/screens/Register";
 import NewPostScreen from "./src/screens/homeStack/NewPostScreen";
 import CameraScreen from "./src/screens/homeStack/cameraScreen";
 
@@ -60,7 +60,7 @@ function AuthStackGroup() {
     return (
         <AuthStack.Navigator initialRouteName="login" >
             <AuthStack.Screen name="login" component={Login} options={{ headerShown: false }} />
-            <AuthStack.Screen name="register" component={register} options={{ headerShown: true, presentation: "fullScreenModal", headerTitle: "" }} />
+            <AuthStack.Screen name="register" component={Register} options={{ headerShown: true, presentation: "fullScreenModal", headerTitle: "" }} />
         </AuthStack.Navigator>
     )
 
