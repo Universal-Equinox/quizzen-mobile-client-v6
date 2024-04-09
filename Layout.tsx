@@ -61,7 +61,8 @@ const AuthStack = createNativeStackNavigator();
 function AuthStackGroup() {
 
     return (
-        <AuthStack.Navigator initialRouteName="login" >
+        <AuthStack.Navigator initialRouteName="login" screenOptions={{
+        }} >
             <AuthStack.Screen name="login" component={Login} options={{ headerShown: false }} />
             <AuthStack.Screen name="register" component={Register} options={{ headerShown: true, presentation: "fullScreenModal", headerTitle: "" }} />
         </AuthStack.Navigator>
@@ -92,7 +93,10 @@ function TabGroup() {
         })} >
 
             <Tab.Screen name="feed" component={Feed} options={{
-                headerTitle: `@${auth.user}`
+                headerTitle: `@${auth.user}`,
+                tabBarLabelStyle: {
+                    
+                }
             }} />
             <Tab.Screen name="notifications" component={Notifications} />
         </Tab.Navigator>
