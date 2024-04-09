@@ -1,11 +1,12 @@
-import { View, Text, Pressable, ScrollView } from 'react-native'
+import { View, Pressable, ScrollView } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { ModalContent, ModalCloseButton, Heading, Divider, ModalBody, ModalFooter, Actionsheet, ActionsheetBackdrop, ActionsheetContent, ActionsheetDragIndicator, ActionsheetDragIndicatorWrapper, ActionsheetItem, ActionsheetItemText, Box, Button, HStack, Image, Modal, VStack, ModalBackdrop, ButtonText } from '@gluestack-ui/themed'
+import { Text, ModalContent, ModalCloseButton, Heading, Divider, ModalBody, ModalFooter, Actionsheet, ActionsheetBackdrop, ActionsheetContent, ActionsheetDragIndicator, ActionsheetDragIndicatorWrapper, ActionsheetItem, ActionsheetItemText, Box, Button, HStack, Image, Modal, VStack, ModalBackdrop, ButtonText } from '@gluestack-ui/themed'
 import { useAuth } from '../../contexts/AuthContext'
 import { useNavigation } from '@react-navigation/native'
 
 import { Ionicons } from '@expo/vector-icons';
+import PostMinimized from '../../components/post/PostMinimized'
 
 
 
@@ -38,7 +39,7 @@ const Profile = ({ navigation }) => {
     navigation.setOptions({
       headerRight: () => (
 
-        <Pressable onPress={handleClose} marginRight={10} >
+        <Pressable onPress={handleClose} marginRight={10} w={50} style={{ backgroundColor: "aqua" }} >
           <Ionicons name="ellipsis-vertical" size={24} color="black" />
         </Pressable>
 
@@ -49,9 +50,10 @@ const Profile = ({ navigation }) => {
 
   return (
 
-    <SafeAreaView style={{ flex: 1, justifyContent: "flex-start", alignItems: "center" }}>
-      <ScrollView showsVerticalScrollIndicator={false} >
-        <VStack space="lg">
+    <View style={{ flex: 1, justifyContent: "flex-start", alignItems: "center" }}>
+      <ScrollView showsVerticalScrollIndicator={false}  >
+        <VStack space="lg" top={10} >
+          {/* HEADER */}
           <Box w="$96"  >
             <HStack space="md" >
               <Box>
@@ -74,8 +76,23 @@ const Profile = ({ navigation }) => {
             </HStack>
 
           </Box>
-          <Button><Text>Profili Düzenle</Text></Button>
-          <Divider my="$0.5" />
+          {/* BUTTON */}
+          <Box>
+            <Button><Text>Profili Düzenle</Text></Button>
+            <Divider my="$0.5" />
+          </Box>
+
+          {/* USERS POSTS */}
+          <Box>
+            <Pressable>
+              <Text color="$blue500">Tümünü Görüntüle...</Text>
+            </Pressable>
+
+            <PostMinimized />
+            <PostMinimized />
+            <PostMinimized />
+
+          </Box>
         </VStack>
 
 
@@ -135,7 +152,7 @@ const Profile = ({ navigation }) => {
         </Modal>
 
       </ScrollView>
-    </SafeAreaView>
+    </View>
 
 
 

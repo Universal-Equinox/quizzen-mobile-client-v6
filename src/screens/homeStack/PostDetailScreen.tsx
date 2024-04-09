@@ -13,6 +13,7 @@ import PostHeader from '../../components/post/PostHeader';
 import PostContent from '../../components/post/PostContent';
 import PostButtons from '../../components/post/PostButtons';
 import ButtonFab from '../../components/ButtonFab';
+import PostMinimized from '../../components/post/PostMinimized';
 
 
 const PostDetail = ({ navigation }) => {
@@ -35,8 +36,8 @@ const PostDetail = ({ navigation }) => {
                             <PostContent />
                             <PostButtons />
 
-                            <CommentCard />
-                            <CommentCard />
+                            <PostMinimized />
+                            <PostMinimized />
 
                         </VStack>
                     </ScrollView>
