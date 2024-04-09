@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "quizzen-client-v6",
+    "name": "Quizzen",
     "slug": "quizzen-client-v6",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,13 +21,19 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.macvercy.quizzenclientv6"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-secure-store"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "c7242750-14ce-44c2-b797-f9ab753e8340"
+      }
+    }
   }
 }
