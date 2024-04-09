@@ -1,26 +1,48 @@
-import { View, Text, ScrollView } from 'react-native'
-import React from 'react'
+import { View, ScrollView } from 'react-native'
+import React, { useLayoutEffect } from 'react'
 
-import { VStack } from "@gluestack-ui/themed"
+import {
+    VStack,
+    Center,
+    Box,
+} from "@gluestack-ui/themed";
 
 import CommentCard from '../../components/CommendCard'
-import Post from '../../components/Post'
+import PostBadges from '../../components/post/PostBadges';
+import PostHeader from '../../components/post/PostHeader';
+import PostContent from '../../components/post/PostContent';
+import PostButtons from '../../components/post/PostButtons';
+import ButtonFab from '../../components/ButtonFab';
 
 
-const PostDetail = () => {
+const PostDetail = ({ navigation }) => {
+
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (<PostBadges />),
+        })
+    }, [])
+
     return (
         <View>
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <VStack space="md" reversed={false} flex={1}>
-                    <Post />
+            <Center>
+                <Box w="$96" >
+                    <ScrollView showsVerticalScrollIndicator={false}>
+                        <VStack space="md" reversed={false} flex={1}>
 
-                    <CommentCard />
-                    <CommentCard />
-                    <CommentCard />
-                    <CommentCard />
-                    <CommentCard />
-                </VStack>
-            </ScrollView>
+                            <PostHeader />
+                            <PostContent />
+                            <PostButtons />
+
+                            <CommentCard />
+                            <CommentCard />
+
+                        </VStack>
+                    </ScrollView>
+                </Box>
+            </Center>
+            <ButtonFab />
         </View>
     )
 }

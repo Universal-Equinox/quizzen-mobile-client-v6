@@ -24,10 +24,12 @@ import CameraScreen from "./src/screens/homeStack/cameraScreen";
 const Drawer = createDrawerNavigator();
 
 function DrawerGroup() {
+    const { auth } = useAuth();
+
     return (
         <Drawer.Navigator screenOptions={{ headerShown: false }} >
-            <Drawer.Screen name="Feed" component={HomeStackGroup} options={{ headerShown: false, drawerIcon: () => <Ionicons name="home" /> }} />
-            <Drawer.Screen name="Profile" component={Profile} options={{ headerShown: true, drawerIcon: () => <Ionicons name="person-sharp" /> }} />
+            <Drawer.Screen name="feed" component={HomeStackGroup} options={{ headerShown: false, drawerIcon: () => <Ionicons name="home" /> }} />
+            <Drawer.Screen name="profile" component={Profile} options={{ headerShown: true, drawerIcon: () => <Ionicons name="person-sharp" />, headerTitle: `@${auth.user}` }} />
             <Drawer.Screen name="Settings" component={Profile} options={{ headerShown: true, drawerIcon: () => <Ionicons name="cog" /> }} />
             {/* <Drawer.Screen name="Log Out" component={Login} options={{ headerShown: false, drawerIcon: () => <Ionicons name="log-out" /> }} /> */}
         </Drawer.Navigator>
@@ -43,10 +45,11 @@ function HomeStackGroup() {
         <HomeStack.Navigator>
             <HomeStack.Screen name="tabgroup" component={TabGroup} options={{ headerShown: false }} />
             <HomeStack.Screen name="login" component={Login} options={{ headerShown: false }} />
-            <HomeStack.Screen name="postDetail" component={PostDetail} options={{ presentation: "modal" }} />
+            <HomeStack.Screen name="postDetail" component={PostDetail} options={{ headerTitle: "", presentation: "modal" }} />
             <HomeStack.Screen name="commentDetail" component={CommentDetail} options={{ presentation: "modal" }} />
             <HomeStack.Screen name="new" component={NewPostScreen} options={{ presentation: "modal" }} />
             <HomeStack.Screen name="camera" component={CameraScreen} options={{ presentation: "modal" }} />
+            <HomeStack.Screen name="userProfile" component={Profile} options={{ presentation: "modal" }} />
         </HomeStack.Navigator>
     )
 
@@ -89,7 +92,7 @@ function TabGroup() {
         })} >
 
             <Tab.Screen name="feed" component={Feed} options={{
-                headerTitle: auth.user
+                headerTitle: `@${auth.user}`
             }} />
             <Tab.Screen name="notifications" component={Notifications} />
         </Tab.Navigator>

@@ -1,11 +1,13 @@
 import { View, Pressable, Image, ScrollView } from 'react-native'
 import { useEffect, useLayoutEffect } from "react";
 
-import Post from '../../components/Post'
+import Post from '../../components/post/Post'
+import ButtonFab from '../../components/ButtonFab';
 import { useAuth } from '../../contexts/AuthContext';
-import { Fab, FabIcon } from '@gluestack-ui/themed';
-import { FontAwesome5 } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { Center } from '@gluestack-ui/themed';
+
+
 
 const Feed = ({ navigation }) => {
     const { auth } = useAuth();
@@ -34,35 +36,22 @@ const Feed = ({ navigation }) => {
     }, []);
 
     return (
-        <View>
-            <ScrollView>
-                <Post />
-                <Post />
-                <Post />
-                <Post />
-                <Post />
-                <Post />
-                <Post />
-                <Post />
-                <Post />
-                <Post />
-                <Post />
-                <Post />
+        <View style={{}} >
+            <Center>
+                <ScrollView showsVerticalScrollIndicator={false} >
+                    <Post />
+                    <Post />
+                    <Post />
+                    <Post />
+                    <Post />
+                    <Post />
+                    <Post />
+                </ScrollView>
 
-            </ScrollView>
 
-            <Fab
-                size="lg"
-                placement="bottom right"
-                isHovered={false}
-                isDisabled={false}
-                isPressed={false}
-                onPress={() => {
-                    navigate("new")
-                }}
-            >
-                <FontAwesome5 name="plus" size={24} />
-            </Fab>
+            </Center>
+
+            <ButtonFab />
 
         </View>
     )
