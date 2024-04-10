@@ -12,7 +12,7 @@ import Feed from "./src/screens/tabScreens/Feed";
 import Notifications from "./src/screens/tabScreens/Notifications";
 import Login from "./src/screens/Login";
 import Profile from "./src/screens/drawerScreens/Profile";
-import { useAuth } from "./src/contexts/AuthContext";
+import { useAuth } from "./src/hooks/UseAuth";
 import Register from "./src/screens/Register";
 import NewPostScreen from "./src/screens/homeStack/NewPostScreen";
 import CameraScreen from "./src/screens/homeStack/cameraScreen";

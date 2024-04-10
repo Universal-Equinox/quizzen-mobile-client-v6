@@ -3,8 +3,10 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { Box, Center, FormControl, VStack, Text, InputField, Button, ButtonText, Input, HStack } from '@gluestack-ui/themed'
 import { Heading } from '@gluestack-ui/themed'
 import { useNavigation } from '@react-navigation/native'
-import { useAuth } from '../contexts/AuthContext'
 import { Pressable } from 'react-native'
+
+import { useAuth } from '../hooks/UseAuth'
+
 
 
 
@@ -58,11 +60,11 @@ const Login = () => {
             $dark-borderColor="$borderDark800"
           >
             <VStack space="xl">
-              <Heading color="$text500" lineHeight="$md">
+              <Heading lineHeight="$md">
                 Giriş
               </Heading>
               <VStack space="xs">
-                <Text color="$text500" lineHeight="$xs">
+                <Text lineHeight="$xs">
                   email adresi
                 </Text>
                 <Input  >
@@ -70,7 +72,7 @@ const Login = () => {
                 </Input>
               </VStack>
               <VStack space="xs">
-                <Text color="$text500" lineHeight="$xs">
+                <Text lineHeight="$xs">
                   şifre
                 </Text>
                 <Input textAlign="center">

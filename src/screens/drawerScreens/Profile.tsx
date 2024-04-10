@@ -2,11 +2,11 @@ import { View, Pressable, ScrollView } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Text, ModalContent, ModalCloseButton, Heading, Divider, ModalBody, ModalFooter, Actionsheet, ActionsheetBackdrop, ActionsheetContent, ActionsheetDragIndicator, ActionsheetDragIndicatorWrapper, ActionsheetItem, ActionsheetItemText, Box, Button, HStack, Image, Modal, VStack, ModalBackdrop, ButtonText } from '@gluestack-ui/themed'
-import { useAuth } from '../../contexts/AuthContext'
 import { useNavigation } from '@react-navigation/native'
-
 import { Ionicons } from '@expo/vector-icons';
+
 import PostMinimized from '../../components/post/PostMinimized'
+import { useAuth } from '../../hooks/UseAuth'
 
 
 

@@ -1,6 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext } from "react";
 import * as SecureStore from "expo-secure-store";
-import { TOKEN_KEY, USER_KEY, AuthContext } from "./AuthContext";
+
+import { } from "react";
+
+interface AuthProps {
+    auth?: { accessToken: string | null; user: string | null };
+    setAuth?: (auth: { accessToken: string | null; user: string | null }) => void;
+    onLogin?: (email: string, password: string) => Promise<any>;
+    onLogout?: () => Promise<any>;
+}
+
+export const TOKEN_KEY = "accessToken";
+export const USER_KEY = "user";
+export const API_URL = "api-adresss-here";
+
+
+
+export const AuthContext = createContext<AuthProps>({});
 
 
 export const AuthProvider = ({ children }: any) => {
@@ -19,15 +35,15 @@ export const AuthProvider = ({ children }: any) => {
             const accessToken = SecureStore.getItem(TOKEN_KEY);
             const user = SecureStore.getItem(USER_KEY);
 
-            if (accessToken !== null) {
+            if (accessToken !== undefined) {
                 // axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.accessToken}`;
-                console.log("context token: " + accessToken);
-                console.log("context user: " + user);
 
                 setAuth({
                     accessToken: accessToken,
                     user: user
                 });
+
+                console.log({ authState: auth });
 
             }
         };
@@ -61,6 +77,8 @@ export const AuthProvider = ({ children }: any) => {
     const logout = async () => {
         try {
 
+            console.log(`"${auth.user}" çıkış yaptı`);
+
             setAuth({
                 accessToken: null,
                 user: null
@@ -69,6 +87,7 @@ export const AuthProvider = ({ children }: any) => {
             // axios.defaults.headers.common['Authorization'] = "";
             await SecureStore.deleteItemAsync(TOKEN_KEY);
             await SecureStore.deleteItemAsync(USER_KEY);
+
 
 
         } catch (error) {
@@ -80,7 +99,8 @@ export const AuthProvider = ({ children }: any) => {
     const value = {
         onLogin: login,
         onLogout: logout,
-        auth
+        auth,
+        setAuth
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

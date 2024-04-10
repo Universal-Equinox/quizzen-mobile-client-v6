@@ -3,7 +3,7 @@ import { useEffect, useLayoutEffect } from "react";
 
 import Post from '../../components/post/Post'
 import ButtonFab from '../../components/ButtonFab';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../hooks/UseAuth'; 
 import { useNavigation } from '@react-navigation/native';
 import { Center } from '@gluestack-ui/themed';
 
