@@ -12,14 +12,14 @@ import { Ionicons } from '@expo/vector-icons';
 import { Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
 
-interface PostButtonProps {
-    postId: string
+interface CommentButtonsProps {
+    commentId: string
     voteCount: number,
-    commentCount: number
+    // commentCount: number
 }
 
 
-const PostButtons: React.FC<PostButtonProps> = ({ postId, voteCount, commentCount }) => {
+const CommentButtons: React.FC<CommentButtonsProps> = ({ commentId, voteCount }) => {
     const { navigate } = useNavigation();
 
 
@@ -35,7 +35,8 @@ const PostButtons: React.FC<PostButtonProps> = ({ postId, voteCount, commentCoun
         <>
             <Box w="$80" alignSelf="center">
                 <HStack space="sm" justifyContent="space-between">
-                    <Button
+                    {/* TODO: İLERDE EKLENİCK FEATURE */}
+                    {/* <Button
                         size="sm"
                         variant="link"
                         action="primary"
@@ -45,12 +46,12 @@ const PostButtons: React.FC<PostButtonProps> = ({ postId, voteCount, commentCoun
                         <HStack space="xs">
                             <Ionicons name="chatbubble-outline" size={19} color="black" />
                             <Pressable onPress={() => navigate("postDetail", {
-                                postId: postId
+                                commentId: commentId
                             })}>
                                 <Text fontSize={12}>{commentCount} yorum</Text>
                             </Pressable>
                         </HStack>
-                    </Button>
+                    </Button> */}
                     <Button
                         size="sm"
                         variant="link"
@@ -88,4 +89,4 @@ const PostButtons: React.FC<PostButtonProps> = ({ postId, voteCount, commentCoun
     )
 }
 
-export default PostButtons
+export default CommentButtons

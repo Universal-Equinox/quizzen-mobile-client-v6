@@ -83,7 +83,7 @@ const NewPostScreen = ({ navigation }) => {
     >
       <Center>
         <Box
-          w="$96"
+          w="full"
           paddingVertical="$1"
           justifyContent="center"
           alignItems="center"

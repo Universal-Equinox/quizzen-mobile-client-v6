@@ -4,31 +4,24 @@ import {
     Box,
     HStack,
     VStack,
-    Avatar,
-    AvatarImage,
-    Heading,
     Text,
-    Divider,
-    Button,
     Actionsheet, ActionsheetBackdrop, ActionsheetContent, ActionsheetDragIndicator, ActionsheetDragIndicatorWrapper, ActionsheetItem, ActionsheetItemText
 
 } from "@gluestack-ui/themed";
 
 import { useNavigation } from "@react-navigation/native"
-import PostButtons from "./PostButtons";
-import PostHeader from "./PostHeader";
-import { PostType, PostUserType } from "../../types/PostType";
+import PostHeader from "../post/PostHeader";
 import { CommentType } from "../../types/CommentType";
-import PostBadges from "./PostBadges";
+import CommentButtons from "./CommentButtons";
 
 
-interface PostMinimizedProps {
-    post: PostType;
+interface CommentMinimizedProps {
+    comment: CommentType;
 
 
 }
 
-const PostMinimized: React.FC<PostMinimizedProps> = ({ post }) => {
+const CommentMinimized: React.FC<CommentMinimizedProps> = ({ comment }) => {
     const { navigate } = useNavigation();
 
     // HAEDERRIGHT DOTS ACTIONSHEET
@@ -40,8 +33,7 @@ const PostMinimized: React.FC<PostMinimizedProps> = ({ post }) => {
             <Box paddingVertical="$1" style={{ width: "96%" }}>
                 <VStack>
 
-                    <PostHeader postUserData={post.user} postCreatedDate={post.createdDate} />
-                    <PostBadges tags={post.tags} />
+                    <PostHeader postUserData={comment.user} postCreatedDate={comment.createdDate} />
 
                     <Box justifyContent="space-between" style={{ width: "80%" }}>
                         <HStack>
@@ -52,7 +44,7 @@ const PostMinimized: React.FC<PostMinimizedProps> = ({ post }) => {
                                     }}
                                 >
                                     <Text>
-                                        {post?.title}
+                                        {comment.text}
                                     </Text>
                                 </Pressable>
                             </Box>
@@ -92,7 +84,7 @@ const PostMinimized: React.FC<PostMinimizedProps> = ({ post }) => {
                         </HStack>
                     </Box>
 
-                    <PostButtons postId={post.id} commentCount={post.answerCount} voteCount={post.voteCount} />
+                    <CommentButtons commentId={comment.id} voteCount={comment.voteCount} />
                 </VStack>
             </Box>
 
@@ -117,4 +109,4 @@ const PostMinimized: React.FC<PostMinimizedProps> = ({ post }) => {
     );
 }
 
-export default PostMinimized
+export default CommentMinimized

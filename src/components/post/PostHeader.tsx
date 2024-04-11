@@ -10,15 +10,22 @@ import {
 
 import { useNavigation } from "@react-navigation/native"
 import { Ionicons } from '@expo/vector-icons';
+import LocalTimeConverter from '../../Helper/LocalTimeConverter';
+import { PostUserType } from '../../types/PostType';
 
+interface PostHeaderProps {
+    postUserData: PostUserType
+    postCreatedDate: string //Post Created Date
+}
 
-const PostHeader = () => {
+const PostHeader: React.FC<PostHeaderProps> = ({ postUserData, postCreatedDate }) => {
 
     const { navigate } = useNavigation();
 
     // HAEDERRIGHT DOTS ACTIONSHEET
     const [showActionsheet, setShowActionsheet] = useState(false)
     const handleClose = () => setShowActionsheet(!showActionsheet)
+
 
     return (
         <>
@@ -36,14 +43,14 @@ const PostHeader = () => {
                                 </Avatar>
                             </Pressable>
 
-                            <Pressable onPress={() => { navigate("userProfile") }} ><Heading fontSize={15}>users name</Heading></Pressable>
+                            <Pressable onPress={() => { navigate("userProfile") }} ><Heading fontSize={15}>{postUserData?.firstName}</Heading></Pressable>
 
-                            <Pressable onPress={() => { navigate("userProfile") }} ><Text fontSize={11}>@username</Text></Pressable>
+                            <Pressable onPress={() => { navigate("userProfile") }} ><Text fontSize={11}> @{postUserData?.userName}</Text></Pressable>
                         </HStack>
                     </Box>
                     <Box justifyContent='flex-end' w="$25" >
                         <HStack space="sm" >
-                            <Text fontSize={10}>06:39 PM</Text>
+                            <Text fontSize={10}>{LocalTimeConverter(postCreatedDate)}</Text>
 
                             <Pressable onPress={handleClose} >
                                 <Ionicons name="ellipsis-vertical" size={17} color="black" />

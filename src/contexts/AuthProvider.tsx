@@ -2,6 +2,8 @@ import { useEffect, useState, createContext } from "react";
 import * as SecureStore from "expo-secure-store";
 
 import { } from "react";
+import Axios from "../api/Axios";
+import axios from "axios";
 
 interface AuthProps {
     auth?: { accessToken: string | null; user: string | null };
@@ -54,15 +56,20 @@ export const AuthProvider = ({ children }: any) => {
 
     const login = async (email: string, pass: string) => {
         try {
-            // const res = await axios.post("apiurl", { email, pass });
+            const res = await Axios.post("auth/login", { email: email, password: pass });
+            // const res = await axios.get("https://google.com");
+            console.log(res.data);
+
             setAuth({
-                accessToken: pass,
-                user: email
+                accessToken: res.data.accessToken,
+                user: res.data.email
             });
 
-            // axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.accessToken}`;
-            await SecureStore.setItemAsync(TOKEN_KEY, pass);
-            await SecureStore.setItemAsync(USER_KEY, email);
+            // console.log({ loginAuthState: auth })
+
+
+            await SecureStore.setItemAsync(TOKEN_KEY, res.data.accessToken);
+            await SecureStore.setItemAsync(USER_KEY, res.data.email);
 
             return {
                 accessToken: pass,
@@ -70,7 +77,7 @@ export const AuthProvider = ({ children }: any) => {
             };
 
         } catch (error) {
-            return error;
+            console.error(error)
         }
     };
 

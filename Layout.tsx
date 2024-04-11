@@ -93,9 +93,9 @@ function TabGroup() {
         })} >
 
             <Tab.Screen name="feed" component={Feed} options={{
-                headerTitle: `@${auth.user}`,
+                headerTitle: `${auth.user}`,
                 tabBarLabelStyle: {
-                    
+
                 }
             }} />
             <Tab.Screen name="notifications" component={Notifications} />

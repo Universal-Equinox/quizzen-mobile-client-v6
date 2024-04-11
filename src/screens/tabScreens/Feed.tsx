@@ -1,22 +1,31 @@
 import { View, Pressable, Image, ScrollView } from 'react-native'
-import { useEffect, useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 import Post from '../../components/post/Post'
 import ButtonFab from '../../components/ButtonFab';
-import { useAuth } from '../../hooks/UseAuth'; 
-import { useNavigation } from '@react-navigation/native';
+
 import { Center } from '@gluestack-ui/themed';
+import { GetPosts } from '../../services/PostService';
 
 
 
 const Feed = ({ navigation }) => {
-    const { auth } = useAuth();
 
-    const { navigate } = useNavigation();
+    const [posts, setPosts] = useState([]);
 
 
     useEffect(() => {
-    });
+
+        if (posts.length <= 0) {
+
+            GetPosts().then(res => {
+                setPosts(res);
+            }).catch(err => {
+                console.error(err);
+            })
+        }
+
+    }, [posts, GetPosts]);
 
 
     useLayoutEffect(() => {
@@ -31,7 +40,7 @@ const Feed = ({ navigation }) => {
                     />
 
                 </Pressable>
-            ),
+            )
         });
     }, []);
 
@@ -39,13 +48,12 @@ const Feed = ({ navigation }) => {
         <View style={{}} >
             <Center>
                 <ScrollView showsVerticalScrollIndicator={false} >
-                    <Post />
-                    <Post />
-                    <Post />
-                    <Post />
-                    <Post />
-                    <Post />
-                    <Post />
+
+                    {posts.map(post => (
+
+                        <Post key={post.id} post={post} />
+                    ))}
+
                 </ScrollView>
 
 

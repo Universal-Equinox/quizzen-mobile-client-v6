@@ -10,7 +10,7 @@ const CommentDetail = () => {
     return (
         <View>
             <Center>
-                <Box w="$96" marginTop={15}>
+                <Box marginTop={15} style={{ width: "97%" }} >
                     <VStack space="md" >
 
                         <PostHeader />

@@ -33,7 +33,6 @@ const Login = () => {
       setEmail("");
       setPass("");
 
-      console.log(res);
 
     } catch (error) {
       console.error(error);
@@ -67,7 +66,7 @@ const Login = () => {
                 <Text lineHeight="$xs">
                   email adresi
                 </Text>
-                <Input  >
+                <Input >
                   <InputField type="text" value={email} onChangeText={(e) => { setEmail(e) }} />
                 </Input>
               </VStack>

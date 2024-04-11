@@ -1,72 +1,74 @@
 import React from 'react'
 import {
     Text,
-    Avatar,
-    AvatarImage,
     Box,
     HStack,
-    Heading,
-    VStack,
     Pressable,
-    BadgeText,
     Image,
-    Divider,
-    Button,
-    ScrollView
+    ScrollView,
+    Center
 } from "@gluestack-ui/themed";
 import { useNavigation } from "@react-navigation/native"
 
+interface PostContent {
+    id: string,
+    title: string,
+    description: string,
+    images: string[]
 
-const PostContent = () => {
+}
+
+interface PostContentProps {
+    content: PostContent
+}
+
+
+const PostContent: React.FC<PostContentProps> = ({ content }) => {
 
     const { navigate } = useNavigation();
 
     return (
         <>
-            <Box w={"$96"}>
+
+            <Box w="full" left={10} right={10} >
                 <Pressable
                     onPress={() => {
-                        navigate("postDetail")
+                        navigate("postDetail", {
+                            postId: content.id
+                        })
                     }}
                 >
-                    <Text fontSize={14}>
-                        its posts character conte its posts characterits posts character
-                        its posts character its posts character its posts character nt.
-                        200 character content. posts character its posts character its
-                        posts character nt. 200 character content.
+                    <Text fontSize={14}  >
+                        {content.title}
                     </Text>
                 </Pressable>
             </Box>
 
+
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                 <HStack space="sm">
 
+                    {content.images && content.images.length > 0 && content.images.map((uri, index) => (
+                        <Pressable key={index} onPress={() => {
+                            return navigate("postDetail", {
+                                postId: content.id
+                            });
+                        }}>
+                            <Image
+                                key={index}
+                                size="2xl"
+                                alt="none"
+                                borderRadius={5}
+                                source={{
+                                    uri: uri,
+                                }}
+                            />
+                        </Pressable>
+                    ))}
 
-                    <Pressable onPress={() => navigate("postDetail")}>
-
-                        <Image
-                            size="2xl"
-                            alt="none"
-                            borderRadius={5}
-                            source={{
-                                uri: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-                            }}
-                        />
-                    </Pressable>
-
-                    <Pressable onPress={() => navigate("postDetail")}>
-
-                        <Image
-                            size="2xl"
-                            alt="none"
-                            borderRadius={5}
-                            source={{
-                                uri: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-                            }}
-                        />
-                    </Pressable>
                 </HStack>
             </ScrollView>
+
         </>
     )
 }

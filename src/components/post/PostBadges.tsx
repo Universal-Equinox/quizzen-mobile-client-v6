@@ -4,8 +4,15 @@ import {
     Badge,
     BadgeText,
 } from "@gluestack-ui/themed";
+import { PostTagsType } from '../../types/PostType';
 
-const PostBadges = () => {
+
+
+interface PostBadgesProp {
+    tags: PostTagsType
+}
+
+const PostBadges: React.FC<PostBadgesProp> = ({ tags }) => {
     return (
         <>
             <HStack space="xs">
@@ -15,11 +22,11 @@ const PostBadges = () => {
                     borderRadius="$xl"
                     action="warning"
                 >
-                    <BadgeText>#KPSS</BadgeText>
+                    <BadgeText>#{tags?.exam}</BadgeText>
                 </Badge>
 
                 <Badge size="sm" variant="outline" borderRadius="$xl" action="info">
-                    <BadgeText>#Genel-yetenek</BadgeText>
+                    <BadgeText>#{tags?.subject}</BadgeText>
                 </Badge>
                 <Badge
                     size="sm"
@@ -27,7 +34,7 @@ const PostBadges = () => {
                     borderRadius="$xl"
                     action="success"
                 >
-                    <BadgeText>#cografya</BadgeText>
+                    <BadgeText>#{tags?.topic}</BadgeText>
                 </Badge>
             </HStack>
         </>
