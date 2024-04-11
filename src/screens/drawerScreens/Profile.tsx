@@ -1,7 +1,6 @@
 import { View, Pressable, ScrollView } from 'react-native'
 import React, { useEffect, useLayoutEffect, useState } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { Text, ModalContent, ModalCloseButton, Heading, Divider, ModalBody, ModalFooter, Actionsheet, ActionsheetBackdrop, ActionsheetContent, ActionsheetDragIndicator, ActionsheetDragIndicatorWrapper, ActionsheetItem, ActionsheetItemText, Box, Button, HStack, Image, Modal, VStack, ModalBackdrop, ButtonText } from '@gluestack-ui/themed'
+import { Text, ModalContent, Heading, Divider, ModalBody, ModalFooter, Actionsheet, ActionsheetBackdrop, ActionsheetContent, ActionsheetDragIndicator, ActionsheetDragIndicatorWrapper, ActionsheetItem, ActionsheetItemText, Box, Button, HStack, Image, Modal, VStack, ModalBackdrop, ButtonText } from '@gluestack-ui/themed'
 import { useNavigation } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons';
 
@@ -9,6 +8,8 @@ import PostMinimized from '../../components/post/PostMinimized'
 import { useAuth } from '../../hooks/UseAuth'
 import { PostType } from '../../types/PostType'
 import { GetUserPosts } from '../../services/PostService'
+import { GetUserByEmail, GetUserById } from '../../services/UserService'
+import { UserType } from '../../types/UserType';
 
 
 
@@ -20,6 +21,9 @@ const Profile = ({ navigation }) => {
 
   //USERS POSTS
   const [posts, setPosts] = useState<PostType[]>([]);
+
+  //USER INFO
+  const [userInfo, setUserInfo] = useState<UserType>();
 
   // HAEDERRIGHT DOTS ACTIONSHEET
   const [showActionsheet, setShowActionsheet] = useState(false)
@@ -42,12 +46,24 @@ const Profile = ({ navigation }) => {
   useEffect(() => {
     try {
 
-      if (posts.length == 0) {
-        GetUserPosts("f4bcd779-a978-436f-b816-bf806fc0886d").then(res => {
-          setPosts(res);
+      if (!userInfo) {
+
+        GetUserByEmail(auth.user).then(res => {
+          setUserInfo(res);
+
+
+          GetUserPosts(res.id).then(res => {
+            setPosts(res);
+          }).catch(err => {
+            console.log(err);
+          })
+
         }).catch(err => {
-          console.log(err);
+          console.log(err)
         })
+
+
+
       }
 
     } catch (error) {
@@ -60,7 +76,7 @@ const Profile = ({ navigation }) => {
     navigation.setOptions({
       headerRight: () => (
 
-        <Pressable onPress={handleClose} marginRight={10} w={50} style={{ backgroundColor: "aqua" }} >
+        <Pressable onPress={handleClose} right={10} w={50} style={{}} >
           <Ionicons name="ellipsis-vertical" size={24} color="black" />
         </Pressable>
 
@@ -90,8 +106,8 @@ const Profile = ({ navigation }) => {
               </Box>
               <Box>
                 <HStack space="md" alignItems="center" justifyContent="space-between" >
-                  <Heading>USER NAME</Heading>
-                  <Text>{auth.user}</Text>
+                  <Heading>{userInfo?.firstName} {userInfo?.lastName}</Heading>
+                  <Text>{userInfo?.userName}</Text>
                 </HStack>
               </Box>
             </HStack>

@@ -4,12 +4,7 @@ import {
     Box,
     HStack,
     VStack,
-    Avatar,
-    AvatarImage,
-    Heading,
     Text,
-    Divider,
-    Button,
     Actionsheet, ActionsheetBackdrop, ActionsheetContent, ActionsheetDragIndicator, ActionsheetDragIndicatorWrapper, ActionsheetItem, ActionsheetItemText
 
 } from "@gluestack-ui/themed";

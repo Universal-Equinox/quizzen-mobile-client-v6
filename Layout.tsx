@@ -29,7 +29,7 @@ function DrawerGroup() {
     return (
         <Drawer.Navigator screenOptions={{ headerShown: false }} >
             <Drawer.Screen name="feed" component={HomeStackGroup} options={{ headerShown: false, drawerIcon: () => <Ionicons name="home" /> }} />
-            <Drawer.Screen name="profile" component={Profile} options={{ headerShown: true, drawerIcon: () => <Ionicons name="person-sharp" />, headerTitle: `@${auth.user}` }} />
+            <Drawer.Screen name="profile" component={Profile} options={{ headerShown: true, drawerIcon: () => <Ionicons name="person-sharp" />, headerTitle: `${auth.user}` }} />
             <Drawer.Screen name="Settings" component={Profile} options={{ headerShown: true, drawerIcon: () => <Ionicons name="cog" /> }} />
             {/* <Drawer.Screen name="Log Out" component={Login} options={{ headerShown: false, drawerIcon: () => <Ionicons name="log-out" /> }} /> */}
         </Drawer.Navigator>

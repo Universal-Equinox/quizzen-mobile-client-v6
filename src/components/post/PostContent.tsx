@@ -34,12 +34,12 @@ const PostContent: React.FC<PostContentProps> = ({ content }) => {
                 <Pressable
                     onPress={() => {
                         navigate("postDetail", {
-                            postId: content.id
+                            postId: content?.id
                         })
                     }}
                 >
                     <Text fontSize={14}  >
-                        {content.title}
+                        {content?.title}
                     </Text>
                 </Pressable>
             </Box>
@@ -48,10 +48,10 @@ const PostContent: React.FC<PostContentProps> = ({ content }) => {
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                 <HStack space="sm">
 
-                    {content.images && content.images.length > 0 && content.images.map((uri, index) => (
+                    {content?.images && content?.images?.length > 0 && content?.images?.map((uri, index) => (
                         <Pressable key={index} onPress={() => {
                             return navigate("postDetail", {
-                                postId: content.id
+                                postId: content?.id
                             });
                         }}>
                             <Image
